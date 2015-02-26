@@ -1,0 +1,212 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="theme.css">
+<script>
+function Username(input)  
+      {   
+      var letters = /^[A-Za-z]+$/;  
+      if(input.value.match(letters))  
+      {  
+      return true;  
+      }  
+      else  
+      {  
+      alert('Please input alphabet characters only');  
+      return false;  
+      }  
+      } 
+      
+function Password(input)  
+{   
+var letters = /^[0-9a-zA-Z]+$/;  
+	if(input.value.match(letters))   
+		return input;
+	else  
+	{  
+	alert('Please input alphanumeric characters only');  
+	return false;  
+	}  
+	
+} 
+
+function checkPassword(f_pass, s_pass)
+{
+	var one = f_pass;
+	var two = s_pass;
+	if(one==two)
+		return true;
+	else
+		{
+		alert('The password does not match');
+		return false;
+		}
+}
+function Name(f_name, l_name){
+var letters = /^[a-zA-Z'. -]+$/;
+if((f_name.value.match(letters)) && (l_name.value.match(letters)))
+return true;
+else
+{
+alert('Invalid Name');
+return false;
+}
+}
+
+function validateBirthday(month, day, year){
+var date = new Date();
+
+var d=date.getDay();
+var m=date.getDate();
+var y=date.getYear();
+
+
+
+	if(y-year>18)
+	   return true;
+	else if(y-year==18){
+		 if(m>month)
+			return true;
+		 else if(m==month){
+			  if(d>day)
+				 return true;
+				 else{
+				 return false;
+				 alert('Below 18');}}
+		 else{
+		 return false;
+		 alert('Below 18');}}
+	else{
+	return false;
+		 alert('Below 18');}
+
+}	
+
+function FirstRadio() {
+    if (document.getElementById("1").checked == true) {
+        return true;
+    }
+    else if (document.getElementById("2").checked == true) {
+        return true;
+    }
+    else if (document.getElementById("3").checked == true) {
+        return true;
+    }
+    else if (document.getElementById("4").checked == true) {
+        return true;
+    }
+    else {
+        alert("You must select one of the options");
+        return false;
+        }
+    }
+    
+function SecondRadio() {
+    if (document.getElementById("11").checked == true) {
+        return true;
+    }
+    else if (document.getElementById("12").checked == true) {
+        return true;
+    }
+    else if (document.getElementById("13").checked == true) {
+        return true;
+    }
+    else if (document.getElementById("14").checked == true) {
+        return true;
+    }
+    else {
+        alert("You must select one of the options");
+        return false;
+        }
+    }
+
+</script>
+</head>
+
+<body>
+
+<h1 class="header">Validation</h1>
+
+<form method="post" action="index1.html" class="form">
+
+	<p>
+	Username:<br />
+	<input type="text" name="username" size="30" id="username"/>
+	<button type="button" onclick="Username(document.getElementById('username'))">Validate Username!</button>
+	</p>
+	
+	<p>
+	Enter Password:<br />
+	<input type="password" name="f_pass" size="30" id="f_pass"/>
+	<button type="button" onclick="Password(document.getElementById('f_pass'))">Validate Password!</button>
+	</p>
+	
+	<p>
+	Re-Enter Password:<br />
+	<input type="password" name="s_pass" size="30" id="s_pass"/>
+	<button type="button" onclick="checkPassword(document.getElementById('f_pass'), document.getElementById('s_pass'))">Check Password!</button>
+	</p>
+	
+	<p>
+	First Name:<br />
+	<input type="text" name="firstname" size="30"  id="f_name"/><br />
+	Last Name:<br />
+	<input type="text" name="lastname" size="30" id="l_name"/>
+	<button type="button" onclick="Name(document.getElementById('f_name'), document.getElementById('l_name'))">Validate My Name!</button>
+	</p>
+	
+	<p>
+	Enter Birthday (dd/mm/yyyy):<br />
+	<input type="text" name="day" size="2" id="day"/>/
+	<input type="text" name="month" size="2" id="month"/>/
+	<input type="text" name="year" size="4" id="year"/>
+	<button type="button" onclick="Birthday(document.getElementById('month'), document.getElementById('day'), document.getElementById('year'),)">Validate My Birthday!</button>
+	</p>
+	
+	<p>
+	<select id="option1">
+  <option value="morning">Morning</option>
+  <option value="afternoon">Afternoon</option>
+  <option value="evening">Evening</option>
+    </select>
+	</p>
+	
+	<p>
+	<select id="option2">
+  <option value="first">6:00-7:00</option>
+  <option value="second">7:00-8:00</option>
+  <option value="third">8:00-9:00</option>
+    </select>
+	</p>
+	
+	<p>
+	How many members are there in your family?
+	<br /><input type="radio" name="member" value="1" id="1"/> 1
+	<br /><input type="radio" name="member" value="2" id="2"/> 2
+	<br /><input type="radio" name="member" value="3" id="3"/> 3
+	<br /><input type="radio" name="member" value="4" id="4"/> 4
+	<br /><button type="button" onclick="FirstRadio()">Check!</button>
+	</p>
+	
+	<p>
+	How many members are there in your family?
+	
+	<br /><input type="radio" name="house" value="1" id="11"/> House
+	<br /><input type="radio" name="house" value="2" id="12"/> Apartment
+	<br /><input type="radio" name="house" value="3" id="13"/> Mobile Home
+	<br /><input type="radio" name="house" value="4" id="14"/> Other
+	<br /><button type="button" onclick="SecondRadio()">Check!</button>
+	</p>
+	
+	<p>Comments/Questions<br />
+	<textarea rows="4" cols="50" id="textarea">
+    </textarea>
+    </p>
+    
+    <p>
+	<input type="submit" value="Submit Information" />
+	</p>
+
+</form>
+
+</body>
+</html>
