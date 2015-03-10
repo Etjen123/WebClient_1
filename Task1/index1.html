@@ -1,0 +1,33 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="theme.css">
+</head>
+<body>
+<script>
+
+var username= localStorage.getItem("username");
+var firstname= localStorage.getItem("firstname");
+var lastname= localStorage.getItem("lastname");
+var day= localStorage.getItem("day");
+var month= localStorage.getItem("month");
+var year= localStorage.getItem("year");
+var option1= localStorage.getItem("option1");
+var option2= localStorage.getItem("option2");
+var member= localStorage.getItem("member");
+var house= localStorage.getItem("house");
+var comment= localStorage.getItem("comment");
+
+document.write("<div id='text'>");
+document.write("<h1> Hi "+username + " !</h1></br>");
+document.write("Your full name is " + firstname + " " + lastname + ".</br>");
+document.write("Your birthday is " + day + "/" + month +"/" + year + ".</br>");
+document.write("You have chosen to be contacted in the " + option1 + " at " + option2 + " .</br>");
+document.write("Your family has " + member + " members.</br>");
+document.write("Your prefered type of residence is " + house +".</br>");
+document.write("Additional comments:</br> ");
+document.write(comment);
+document.write("</div>");
+</script>
+
+</body>
+</html>

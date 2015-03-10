@@ -20,13 +20,13 @@
 		return array;
 	}
 	
-		/*This function checks if the tile we want to move is close to the empty tile.
-		It takes as argument the 'id' of each image and a 'row' property. This row property is first set as the image name.
-		The reason for having this property is that when we check if the position is 1 to the left (empty-1) or 1 to the right (empty+1),
-		the tile we want to move might be 1 to the left of the empty one but 1 row above. Having a row property allows us to stop that 
-		from happening.
+		/*  This function checks if the tile we want to move is close to the empty tile.
+			It takes the image 'id' as argument. With the id it checks if its immediately next
+			to the empty tile. The division by 4 checks if they are on the same row because
+			if this check isn't performed, we might get a mistake where a tile which is to the 
+			right of the empty tile but one row below or above is considered as movable.
 		*/
-	function check(id,row)
+	function check(id)
 	{	
 		var empty;
 		
@@ -37,14 +37,24 @@
 			// The image source is saved not as 'Images/1.png' but as the full name starting from C:// etc.
 			// With indexOf we check if the name of the image is included in the src name.
 			if( a.indexOf("Images/empty.png") >= 0)
-				empty=i;
+			{
+				empty=i; 
 				
-			if( ((id==(empty-1)  || id==(empty+1)) && document.getElementById(id).name == document.getElementById(empty).name ) || id==(empty+4) || id==(empty-4) )	
+		
+			if( ((id==(empty-1)  || id==(empty+1)) && parseInt(id/4) == parseInt(empty/4) )  || id==(empty+4) || id==(empty-4) )	
 				document.getElementById(id).style.opacity=0.5;
+				
+				//if( ((id==(empty-1)  || id==(empty+1)) && document.getElementById(id).name == document.getElementById(empty).name ) || id==(empty+4) || id==(empty-4) )	
+			//		document.getElementById(id).style.opacity=0.5;
+				}
+				
+				
+				
+			
+			
 		}
 		
 		
-			
 			
 	}
 	
@@ -56,22 +66,22 @@
 
 
 <form id="images">
-<img src="" id="0" name="1" onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
-<img src="" id="1" name="1" onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
-<img src="" id="2" name="1" onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
-<img src="" id="3" name="1" onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1"></br>
-<img src="" id="4" name="2" onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
-<img src="" id="5" name="2" onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
-<img src="" id="6" name="2" onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
-<img src="" id="7" name="2" onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1"></br>
-<img src="" id="8" name="3" onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
-<img src="" id="9" name="3" onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
-<img src="" id="10" name="3" onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
-<img src="" id="11" name="3" onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1"></br>
-<img src="" id="12" name="4" onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
-<img src="" id="13" name="4" onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
-<img src="" id="14" name="4" onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
-<img src="" id="15" name="4" onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
+<img src="" id="0"  onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
+<img src="" id="1"  onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
+<img src="" id="2"  onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
+<img src="" id="3"  onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1"></br>
+<img src="" id="4"  onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
+<img src="" id="5"  onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
+<img src="" id="6"  onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
+<img src="" id="7"  onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1"></br>
+<img src="" id="8"  onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
+<img src="" id="9"  onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
+<img src="" id="10"  onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
+<img src="" id="11"  onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1"></br>
+<img src="" id="12"  onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
+<img src="" id="13"  onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
+<img src="" id="14"  onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
+<img src="" id="15"  onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
 </form>
 	
 <script>
@@ -123,7 +133,8 @@
 	
 			}
 				
-				if((img==(empty-1) || img==(empty+1)) &&  document.getElementById(img).name == document.getElementById(empty).name || img==(empty+4) || img==(empty-4) )
+				if( ((img==(empty-1)  || img==(empty+1)) && parseInt(img/4) == parseInt(empty/4) )  || img==(empty+4) || img==(empty-4) )	
+				
 				{
 		
 			

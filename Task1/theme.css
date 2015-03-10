@@ -1,14 +1,22 @@
 body{
-margin-left:auto;
-margin-right:auto;
+
 font-family: arial;
 font-size:14px;
 background-color:#d3d3d3;
 color: black;
 color:#800000;
+
+}
+#input{
+text-align: center;
+}
+.form1{
+margin: 0 auto;
+width: 250px;
 }
 
-.form{
-margin-left:auto;
-margin-right:auto;
+#text
+{
+	 text-align: center;
+	 font-size:24px;
 }
