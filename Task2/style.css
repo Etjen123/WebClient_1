@@ -1,0 +1,29 @@
+
+
+ form {
+    margin-top:30px;
+    text-align: center;
+    }
+
+.opaque
+{
+	opacity:0.4;
+}
+html { 
+  background: url(bg.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+ 
+
+ 
+}
+
+#moves
+{
+	height:50px;
+	width:50px;
+	font-size:50px;
+	background-color:white;
+	text-align: center
+}

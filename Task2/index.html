@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Mario Puzzle</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+
+
+<script>
+	
+	
+	//This function takes an array as argument and randomly rearranges the elements inside that array.
+	function shuffleArray(array) {
+		for (var i = array.length - 1; i > 0; i--) {
+			var j = Math.floor(Math.random() * (i + 1));
+			var temp = array[i];
+			array[i] = array[j];
+			array[j] = temp;
+		}
+		return array;
+	}
+	
+		/*This function checks if the tile we want to move is close to the empty tile.
+		It takes as argument the 'id' of each image and a 'row' property. This row property is first set as the image name.
+		The reason for having this property is that when we check if the position is 1 to the left (empty-1) or 1 to the right (empty+1),
+		the tile we want to move might be 1 to the left of the empty one but 1 row above. Having a row property allows us to stop that 
+		from happening.
+		*/
+	function check(id,row)
+	{	
+		var empty;
+		
+		for(i=0;i<16;i++)
+		{	
+			var a =document.images[i].src;
+			
+			// The image source is saved not as 'Images/1.png' but as the full name starting from C:// etc.
+			// With indexOf we check if the name of the image is included in the src name.
+			if( a.indexOf("Images/empty.png") >= 0)
+				empty=i;
+				
+			if( ((id==(empty-1)  || id==(empty+1)) && document.getElementById(id).name == document.getElementById(empty).name ) || id==(empty+4) || id==(empty-4) )	
+				document.getElementById(id).style.opacity=0.5;
+		}
+		
+		
+			
+			
+	}
+	
+	
+</script>
+</head>
+
+<body>
+
+
+<form id="images">
+<img src="" id="0" name="1" onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
+<img src="" id="1" name="1" onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
+<img src="" id="2" name="1" onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
+<img src="" id="3" name="1" onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1"></br>
+<img src="" id="4" name="2" onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
+<img src="" id="5" name="2" onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
+<img src="" id="6" name="2" onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
+<img src="" id="7" name="2" onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1"></br>
+<img src="" id="8" name="3" onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
+<img src="" id="9" name="3" onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
+<img src="" id="10" name="3" onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
+<img src="" id="11" name="3" onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1"></br>
+<img src="" id="12" name="4" onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
+<img src="" id="13" name="4" onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
+<img src="" id="14" name="4" onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
+<img src="" id="15" name="4" onmouseover="check(this.id,this.name)" onmouseout="this.style.opacity=1">
+</form>
+	
+<script>
+
+
+	var tiles = new Array(16);
+	var j=1;
+	var counter=0;
+	
+	//Fill the array with our images.
+	for(var i=0;i<15;i++)
+	{	
+		
+		tiles[i]="Images/"+j+".png";
+		j++;
+	}
+	//The last array item is the empty image.
+	tiles[15]="Images/empty.png";
+	
+	
+	//This is the main function. It has most of the functionality of the page.
+	function move()
+	{	
+
+		var empty,img, temp;
+		
+		
+		//Save the user input.
+		var user=document.getElementById('img').value;
+		var check = "Images/" + user + ".png"; // If the user enters 1, we save it as Images/1.png
+		
+		
+		//Loop through our array and locate where the empty image and the user requested image are located.
+			for(i=0;i<16;++i)
+			{		
+					
+				
+					if(tiles[i]==="Images/empty.png")
+					{
+						empty=i;
+					}
+					
+					if(tiles[i] == "Images/" + user + ".png")
+					{	
+						img=i;
+					
+					} 
+			
+	
+			}
+				
+				if((img==(empty-1) || img==(empty+1)) &&  document.getElementById(img).name == document.getElementById(empty).name || img==(empty+4) || img==(empty-4) )
+				{
+		
+			
+						temp = tiles[img];
+						tiles[img]= tiles[empty];
+						tiles[empty] = temp;
+						
+						
+						
+						for(i=0;i<16;i++)
+						{	
+							var a = document.images[i].src
+							
+							if( a.indexOf(tiles[empty]) >= 0)
+							{
+								
+								document.images[i].src= tiles[img];
+							}
+							
+							if( a.indexOf(tiles[img]) >= 0)
+							{
+								document.images[i].src = tiles[empty];
+							}
+								
+						}
+						
+						//This is the counter which shows how many moves the user has performed.
+						counter++;
+						document.getElementById("moves").value=counter;
+					}
+					
+					
+			//This variable is used to check if the game is completed.
+			var check=true;
+			var j=1;
+			
+			//If the images are arranged correctly we add true to it.
+			//If only 1 image is in the wrong spot the variable will be turned to 'false' and due to the way we change it, it can never become true.
+			for(i=0;i<15;i++)
+			{
+				var a = document.images[i].src
+				
+				if( a.indexOf("Images/"+j+".png") >= 0)
+					check=check && true;
+				else 
+					check = check && false;
+					j++;
+			}
+			
+			if(check==true)
+			{
+			alert("YOU HAVE SOLVED THE GAME!");
+			alert("You did:"+counter+" moves.");
+			}
+		
+		
+	}
+	
+
+	
+	//Adds the images to the <img> we created above.
+	function display()
+	{
+			for(var i=0;i<16;i++)
+		{	
+			if(i%4==0 && i>0)
+				{
+				document.write("</br>");
+				}
+			document.images[i].src=tiles[i];
+		
+		}
+		
+	}
+	
+
+
+
+		
+	//We Shuffle the array and then display it
+	shuffleArray(tiles);
+	display();
+	
+	
+		
+	
+		
+</script>
+
+	
+	<form id="input"  onkeypress="return event.keyCode != 13">
+	
+	<input type="text" id="img">  
+	<input type="button" value="Move!" onclick="move()">        <input type="text" disabled='true' id="moves" value=0>
+	
+	</form>
+	
+	
+
+</body>
+
+</html>
